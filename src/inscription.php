@@ -4,14 +4,84 @@
 		<title> Inscription </title>
 		<meta charset="utf-8"/>	
 		<style>h1{color: red; font-weight: bold; text-decoration: underline;}
+		
+		
 		h2{font-weight: bold; text-decoration: underline;}
+		
 		h3{text-align: center; color: blue; font-size: 3em; text-decoration: underline;}
+		
 		form p label{margin-left: -7em; float: left;width:50%; text-align: right; padding: 1em;}
+		
 		form p input {padding: 6px; background-color: #ddd;border-style: groove;border-width: 5px;border-color: #444;}
+		
 		form p #sansLabel{margin-left: -3em; font-size: 130%; font-weight: bolder; float: left;}
+		
 		.erreur{color: red; text-align: center; font-weight: bold; font-size: 2em;}
+		
 		table{margin-left: auto; margin-right: auto;}
+		
 		td{text-align: center;}
+		body{
+background-color:DarkSalmon; 
+color white;
+}
+header h3{
+height:50px;
+font-size:30px;
+}
+header{
+background-color:OrangeRed;
+width: auto;
+color:white;
+
+}
+article{
+width: 500px;
+font-style:italic;
+}
+h1{
+
+color:white;
+}
+a{
+color:white;
+background-color:white;
+ line-height: 10px;
+ height:50px;
+}
+input{
+color:teal;
+}
+label{
+color:white;
+}
+
+ul#Menu { 
+width : 340px; 
+height : 30px;
+margin : 2em 0 0 0;
+padding : 0;
+background-color : #f4f9fd;
+border : 1px dashed black;
+list-style-type : none; 
+}
+ 
+ul#Menu li {
+padding : 0 0.5em;  
+line-height : 30px;
+display:inline;
+border-left : 2px dashed black; 
+}
+ 
+
+ul#Menu a {
+color : black;
+text-decoration : none;
+padding : 0 0.5em; 
+font :  0.8em "Trebuchet MS";
+}
+ 
+ul#Menu a:hover { text-decoration : underline; }
 		</style>
 	</head>
 	
