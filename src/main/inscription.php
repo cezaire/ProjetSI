@@ -42,7 +42,7 @@
 	
 	
 	<footer>
-		<a href="./accueil.php">Retour à la page principale</a>
+		<a href="./accueil.php">Retour à l'accueil</a>
 	</footer>
 
 </html>

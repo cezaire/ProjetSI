@@ -21,7 +21,6 @@
 	</body>
 
 
-</html>
 
 <?php
 session_start();
@@ -46,7 +45,7 @@ if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){
 				if($verif){
 					$_SESSION['id']=$id;
 					$_SESSION['mdp']=$mdp;
-					header('Location:https://www.google.fr/?gws_rd=ssl');
+					header('Location:./accueil.php');
 				}
 				else{
 					echo 'Identifiant ou Mot de Passe incorrects';
@@ -68,10 +67,15 @@ $r.='<div class="form-group"><label>Identifiant</label><input class="form-contro
 $r.='<div class="form-group"><label>Mot de Passe</label><input class="form-control" type="password" name="mdp"/></div>'; 
 $r.='<div class="form-group"><input class="btn btn-primary" id="submit" type="submit" name="connexion" value="connexion"/></div>'; 
 $r.='<div class="form-group"><input class="btn btn-primary" id="reset" type="reset" name="reset" value="reset"/></div>';
-$r.='<a href="Accueil.php"> Retour Accueil </a>';
 $r.='</form></div>'; 
 
 return $r;
 
 }
 ?>
+
+	<footer>
+		<a href="./accueil.php">Retour à l'accueil</a>
+	</footer>
+
+</html>
