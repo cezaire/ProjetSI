@@ -23,7 +23,7 @@ session_start();
 	<body>
 	
 		<div class="container">
-			<form class="form-horizontal" action="#" method="post">
+			<form class="form-horizontal" enctype="multipart/form-data" action="#" method="post">
 					<div class="form-group">
 							<label>Titre de l'article</label>
 							<input type="text" class="form-control" name="titre" value=""/>
@@ -71,17 +71,47 @@ session_start();
 					$trouve=0;
 					
 					while ($ligne = $reponse->fetch()){
-							if($trouve==0 && $ligne['idArticle']==$titre){
+							if($trouve==0 && $ligne['titre']==$titre){
 								$trouve=1;
 								echo("Changer de titre : Article deja existant");
 						}
 					}
 					if($trouve==0){
-					
-						$image='';
-						$ajout = $bdd->prepare("INSERT INTO article (idArticle, texte, idPersonne) VALUES (:idArticle, :texte, :idPersonne)");
-						$ajout->bindParam(':idArticle', $titre);
-						//$ajout->bindParam(':image', $image);
+
+						//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
+						$content_dir = '../img/'; // dossier où sera déplacé le fichier
+
+						$tmp_file = $_FILES['image']['tmp_name'];
+
+						if( !is_uploaded_file($tmp_file) )
+						{
+							exit("L'image est introuvable");
+						}
+
+						// on vérifie maintenant l'extension
+						$type_file = $_FILES['image']['type'];
+
+						if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png') )
+						{
+							exit("Le fichier n'est pas une image");
+						}
+
+						// on copie le fichier dans le dossier de destination
+						$name_file = $_FILES['image']['name'];
+
+						if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
+						{
+							exit("Impossible de copier l'image dans $content_dir");
+						}
+
+						echo "L'image a bien été uploadé";
+						
+						
+						//AJOUT DE L'ARTICLE DANS LA BDD
+						$image="$content_dir$name_file";
+						$ajout = $bdd->prepare("INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)");
+						$ajout->bindParam(':titre', $titre);
+						$ajout->bindParam(':image', $image);
 						$ajout->bindParam(':texte', $texte);
 						$ajout->bindParam(':idPersonne', $personne);
 						$ajout->execute();

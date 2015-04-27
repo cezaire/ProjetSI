@@ -37,28 +37,83 @@ session_start();
 			<h1><b>Blog</b></h1>
 			<p>Avant-propos
 
-		Cette charte a été élaborée afin de préciser aux utilisateurs du site http://www.METTRELAPAGE.net les conditions d'utilisation de ce dernier, notamment l'utilisation des services de communication (tels que le forum) permettant à des utilisateurs du monde entier, possédant généralement des cultures différentes, d'échanger des messages en ligne. 
-
-
-		Toute personne naviguant sur le site est considérée comme un utilisateur, qu'elle soit identifiée ou non sur le site. 
-
-
-		Le forum de NOMFORUM est librement ouvert pour permettre au plus grand nombre de discuter librement sur des sujets concernant l'informatique et les nouvelles technologies. Toutefois, afin de garantir la meilleure qualité dans les échanges et de protéger les utilisateurs des messages insultants ou inappropriés d'usagers indélicats, le forum est modéré a posteriori, ce qui signifie que des personnes accréditées (les modérateurs) ont la possibilité de supprimer les messages ne se conformant pas à la présente charte. 
-
-		Périmètre
-
-		NOMFORUM (CCM) met à disposition de tous des documentations gratuites concernant l'informatique et les accompagne de services en ligne. CCM a été développé de manière à offrir un service gratuit de qualité à ses différents utilisateurs afin de permettre le partage de l'information en matière de nouvelles technologies. Il s'adresse ainsi aussi bien à des enfants mineurs qu'à des étudiants, à des personnes dans un contexte professionnel, ou bien à des personnes retraitées cherchant à approfondir leurs connaissances en matière de nouvelles technologies. 
-
-
-		Dans ce cadre, tous les utilisateurs du site se doivent de respecter les autres usagers en adoptant une attitude citoyenne conforme à la philosophie du site. 
-
-
-		Dans ce même esprit, chaque membre se doit d'utiliser son compte de manière personnelle ; aussi, il convient de ne pas divulguer son mot de passe quelles qu'en soient les circonstances. 
-
-
-		Les propositions d'aide par messagerie privée ou en prise de contrôle à distance ne sont pas permises sur le forum et les intervenants verront leurs messages supprimés. Exception faite des intervenants certifiés ccm dans le cadre d'un suivi de dossier et de besoin de numéro confidentiel ; le reste de la discussion devant se poursuivre sur le forum. 
-		</p>
+				Ce site est un blog interactif, a vous de le compléter !  
+			</p>
 		</article>
+		<?php
+		try{
+
+			$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
+			
+			//Nombre d'article par page
+			$nombreDeMessagesParPage = 2;
+
+			//$reponse = $bdd->prepare("SELECT COUNT(*) AS nb_messages FROM mot where valide = :valide");
+			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM article");
+			//$reponse->execute(array('valide' => 'oui'));
+			$donnees = $reponse->fetch();
+
+			$totalDesMessages = $donnees['nb_messages'];
+			// On calcule le nombre de pages à créer
+			$nombreDePages  = ceil($totalDesMessages / $nombreDeMessagesParPage);
+			// Puis on fait une boucle pour écrire les liens vers chacune des pages
+			echo 'Page : ';
+			for ($i = 1 ; $i <= $nombreDePages ; $i++)
+			{
+				echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
+			}
+
+			 
+			 
+			// --------------- Étape 3 ---------------
+			// Maintenant, on va afficher les messages
+			// ---------------------------------------
+			 
+			if (isset($_GET['page']))
+			{
+					$page = $_GET['page']; // On récupère le numéro de la page indiqué dans l'adresse (livreor.php?page=4)
+			}
+			else // La variable n'existe pas, c'est la première fois qu'on charge la page
+			{
+					$page = 1; // On se met sur la page 1 (par défaut)
+			}
+			 
+			// On calcule le numéro du premier message qu'on prend pour le LIMIT de MySQL
+			$premierMessageAafficher = ($page - 1) * $nombreDeMessagesParPage;
+
+			//$reponse = $bdd->query("SELECT * FROM mot where valide='oui' ORDER BY num_m DESC LIMIT " . $premierMessageAafficher . ', ' . $nombreDeMessagesParPage);
+			$reponse = $bdd->query("SELECT * FROM article ORDER BY idArticle DESC LIMIT " . $premierMessageAafficher . ', ' . $nombreDeMessagesParPage);
+
+
+			//echo '<table id="consultation" border="1">';
+
+			//while ($donnees = mysql_fetch_array($reponse)) 
+			while($donnees = $reponse->fetch())
+			{
+			echo "<div class='table table-bordered'>";
+				echo '<table border="1">';
+				echo	'<tr> ';
+				echo	"<td>N° Article : $donnees[idArticle]</td></tr>";
+				echo	"<tr><td> $donnees[titre]</td></tr>";
+				echo	"<tr><td> $donnees[texte]</td></tr>";
+				echo	"<tr><td><img src='$donnees[image]' alt=''/></td></tr>";
+				echo	"<tr><td>Auteur : $donnees[idPersonne]</td></tr>";
+
+				echo '</table><br/>';
+			echo "</div>";
+			}
+			
+
+			$reponse->closeCursor();
+
+		}
+		catch (Exception $e){
+		
+			die('Erreur : ' . $e->getMessage());
+			}
+		?>
+		
+		
 	</div>
 	</body>
 </html>
