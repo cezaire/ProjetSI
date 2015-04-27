@@ -1,98 +1,49 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
 		<title> Inscription </title>
 		<meta charset="utf-8"/>	
-		<style>h1{color: red; font-weight: bold; text-decoration: underline;}
-		
-		
-		h2{font-weight: bold; text-decoration: underline;}
-		
-		h3{text-align: center; color: blue; font-size: 3em; text-decoration: underline;}
-		
-		form p label{margin-left: -7em; float: left;width:50%; text-align: right; padding: 1em;}
-		
-		form p input {padding: 6px; background-color: #ddd;border-style: groove;border-width: 5px;border-color: #444;}
-		
-		form p #sansLabel{margin-left: -3em; font-size: 130%; font-weight: bolder; float: left;}
-		
-		.erreur{color: red; text-align: center; font-weight: bold; font-size: 2em;}
-		
-		table{margin-left: auto; margin-right: auto;}
-		
-		td{text-align: center;}
-		body{
-background-color:DarkSalmon; 
-color white;
-}
-header h3{
-height:50px;
-font-size:30px;
-}
-header{
-background-color:OrangeRed;
-width: auto;
-color:white;
-
-}
-article{
-width: 500px;
-font-style:italic;
-}
-h1{
-
-color:white;
-}
-a{
-color:white;
-background-color:white;
- line-height: 10px;
- height:50px;
-}
-input{
-color:teal;
-}
-label{
-color:white;
-}
-
-ul#Menu { 
-width : 340px; 
-height : 30px;
-margin : 2em 0 0 0;
-padding : 0;
-background-color : #f4f9fd;
-border : 1px dashed black;
-list-style-type : none; 
-}
- 
-ul#Menu li {
-padding : 0 0.5em;  
-line-height : 30px;
-display:inline;
-border-left : 2px dashed black; 
-}
- 
-
-ul#Menu a {
-color : black;
-text-decoration : none;
-padding : 0 0.5em; 
-font :  0.8em "Trebuchet MS";
-}
- 
-ul#Menu a:hover { text-decoration : underline; }
-		</style>
 	</head>
 	
+	<header>
+	<div class='page-header'>
+		<div class='container'>
+			<h1 style='text-align: center;'>Inscription</h1>
+		</div>
+	</div>
+	</header>
+	
 	<body>
-		<form action="#" method="post">
-			<p><label>Identifiant</label><input type="text" name="id" value=""/></p>
-			<p><label>Email</label><input type="text" name="email" value=""/></p>
-			<p><label>Mot de Passe</label><input type="password" name="mdp" value=""/></p>
-			<p><label id='sansLabel'></label><input type="submit" name="inscription" value="inscription"/></p>
-		</form>
+	
+		<div class="container">
+			<form class="form-horizontal" action="#" method="post">
+					<div class="form-group">
+						<label>Identifiant </label>
+						<input type="text" class="form-control" name="id" value=""/>
+					</div>
+					<div class="form-group">
+						<label>Email </label>
+						<input type="text" class="form-control" name="email" value=""/>
+					</div>
+					<div class="form-group">
+						<label>Mot de Passe </label>
+						<input type="password" class="form-control" name="mdp" value=""/>
+					</div>
+					<div class="form-group">
+						<input class="btn btn-primary" type="submit" name="inscription" value="inscription"/>
+					</div>
+					
+			</form>		
+		</div>
 	</body>
+	
+	
+	<footer>
+		<a href="./accueil.php">Retour à la page principale</a>
+	</footer>
 
 </html>
 
