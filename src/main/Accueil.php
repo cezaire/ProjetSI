@@ -27,9 +27,7 @@ session_start();
 			<ul class="list-inline" id="Menu">
 			  <li><a href="connexionUsers.php" title="Connexion">Connexion</a></li>
 			  <li><a href="Inscription.php" title="Inscription">Inscription</a></li>
-			  <li><a href="#" title="Visiteurs">Visiteurs</a></li>
 			  <?php  if(isset($_SESSION['id'])){ echo "<li><a href='article.php' title='Créer un article'>Créer un article</a></li>";} ?>
-			  <li><a href="#" title="Aide">Aide</a></li>
 			  <?php  if(isset($_SESSION['id'])){ echo "<li><a href='deconnexion.php' title='Déconnexion'>Déconnexion</a></li>";} ?>
 
 			  

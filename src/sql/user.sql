@@ -26,18 +26,18 @@ SET time_zone = "+00:00";
 -- Structure de la table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `personne` (
   `id` char(100) NOT NULL,
   `email` char(100) NOT NULL,
   `mdp` char(10) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Contenu de la table `user`
+-- Contenu de la table `personne`
 --
 
-INSERT INTO `user` (`id`, `email`, `mdp`) VALUES
-('$id', '$email', '$mdp'),
+INSERT INTO `personne` (`id`, `email`, `mdp`) VALUES
+('jeremy', 'jeremy@gmail.com', '123'),
 ('paul14', 'paul.14@gmail.com', '654543'),
 ('paul12', 'paul.12@gmail.com', '56455'),
 ('paul11', 'paul11@gmail.com', '56468435');
@@ -52,14 +52,22 @@ INSERT INTO `user` (`id`, `email`, `mdp`) VALUES
 
 CREATE TABLE IF NOT EXISTS `article` (
   `idArticle` char(100) NOT NULL,
-  `text` char(100) NOT NULL,
-  `img` char(50) NOT NULL
+  `texte` char(100) NOT NULL,
+  `image` char(50) NOT NULL,
+  `idPersonne` char(100) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Index pour la table `user`
+-- Contenu de la table `article`
 --
-ALTER TABLE `user`
+
+INSERT INTO `article` (`idArticle`, `texte`, `image`, `idPersonne`) VALUES
+("article1", "Je suis l'image d'un mouton", "../img/mouton.jpg", "jeremy");
+
+--
+-- Index pour la table `personne`
+--
+ALTER TABLE `personne`
  ADD PRIMARY KEY (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
