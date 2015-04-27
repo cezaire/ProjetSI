@@ -37,7 +37,7 @@ if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){
 			
 			$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
 		
-				$requete="select * from user where id='".$id."' AND mdp='".$mdp."'";
+				$requete="select * from personne where id='".$id."' AND mdp='".$mdp."'";
 				$reponse = $bdd->query($requete);
 				
 				$verif=$reponse->fetch();

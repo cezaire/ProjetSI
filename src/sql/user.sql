@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `idArticle` char(100) NOT NULL,
   `texte` char(100) NOT NULL,
   `image` char(50) NOT NULL,
-  `idPersonne` char(100) NOT NULL
+  `idPersonne` char(100) NOT NULL,
+  FOREIGN KEY (idPersonne) REFERENCES personne(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
@@ -69,6 +70,12 @@ INSERT INTO `article` (`idArticle`, `texte`, `image`, `idPersonne`) VALUES
 --
 ALTER TABLE `personne`
  ADD PRIMARY KEY (`id`);
+ 
+ --
+-- Index pour la table `article`
+--
+ALTER TABLE `article`
+ ADD PRIMARY KEY (`idArticle`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
