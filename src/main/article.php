@@ -77,35 +77,37 @@ session_start();
 						}
 					}
 					if($trouve==0){
+						$image='';
+						if(isset($_FILES['image'])){						
 
-						//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
-						$content_dir = '../img/'; // dossier où sera déplacé le fichier
+							//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
+							$content_dir = '../img/'; // dossier où sera déplacé le fichier
 
-						$tmp_file = $_FILES['image']['tmp_name'];
+							$tmp_file = $_FILES['image']['tmp_name'];
 
-						/*if( !is_uploaded_file($tmp_file) )
-						{
-							exit("L'image est introuvable");
-						}*/
+							/*if( !is_uploaded_file($tmp_file) )
+							{
+								exit("L'image est introuvable");
+							}*/
 
-						// on vérifie maintenant l'extension
-						$type_file = $_FILES['image']['type'];
+							// on vérifie maintenant l'extension
+							$type_file = $_FILES['image']['type'];
 
-						if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png') )
-						{
-							exit("Le fichier n'est pas une image");
+							if( !strstr($type_file, 'jpg') && !strstr($type_file, 'jpeg') && !strstr($type_file, 'bmp') && !strstr($type_file, 'gif') && !strstr($type_file, 'png') )
+							{
+								exit("Le fichier n'est pas une image");
+							}
+
+							// on copie le fichier dans le dossier de destination
+							$name_file = $_FILES['image']['name'];
+
+							if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
+							{
+								exit("Impossible de copier l'image dans $content_dir");
+							}
+
+							echo "L'image a bien été uploadé";
 						}
-
-						// on copie le fichier dans le dossier de destination
-						$name_file = $_FILES['image']['name'];
-
-						if( !move_uploaded_file($tmp_file, $content_dir . $name_file) )
-						{
-							exit("Impossible de copier l'image dans $content_dir");
-						}
-
-						echo "L'image a bien été uploadé";
-						
 						
 						//AJOUT DE L'ARTICLE DANS LA BDD
 						$image="$content_dir$name_file";
