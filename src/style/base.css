@@ -1,0 +1,50 @@
+﻿/*!
+ * Start Bootstrap - Full Slider HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+body{
+	/*background-image: url('../img/background.gif');*/
+	background-color: #5EB6DD;
+}
+
+table{
+	/*background-color: #5EB6DD;*/
+	background-color: white;
+}
+
+header{
+	background-color: #5882FA;
+	margin-top: auto;
+}
+
+ h3, td{
+	color: black;
+}
+
+a, h1{
+	color: white;
+}
+
+#entetePage {
+	color: white;
+}
+
+td button{
+	margin-right: 1em;
+}
+
+footer{
+	text-align: center;
+	color: white;
+	margin-bottom: 2em;
+}
+
+.table{
+	border: 3px solid #2E2EFE;
+}
+
+
+

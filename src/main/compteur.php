@@ -19,6 +19,6 @@ function compteurGlobal(){
 			fputs($compteur_f, $compte);
 	}
 	fclose($compteur_f);
-	echo '<strong>'.$compte.'</strong> visites';
+	echo '<p><strong>'.$compte.'</strong> visites</p>';
 }
 ?>

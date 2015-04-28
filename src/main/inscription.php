@@ -7,8 +7,9 @@ require_once('conf.inc.php');
 <html>
 	<head>
 		<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../style/base.css" rel="stylesheet">		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script src="../bootstrap/js/bootstrap.min.js"></script>
 		<title> Inscription </title>
 		<meta charset="utf-8"/>	
 	</head>

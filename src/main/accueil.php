@@ -9,8 +9,9 @@ require_once('compteur.php');
 
 	<head>
 		<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+		<link href="../style/base.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="bootstrap/js/bootstrap.min.js"></script>	
+		<script src="../style/bootstrap/js/bootstrap.min.js"></script>	
 		<title>ACCUEIL </title>  
 		<meta charset="utf-8"/>
 	</head>
@@ -18,7 +19,7 @@ require_once('compteur.php');
 	<header>
 	<div class='page-header'>
 		<div class='container'>
-			<h1 style='text-align: center;'>ACCUEIL</h1>
+			<h1 style='text-align: center;'>BLOG TA MIAGE</h1>
 		</div>
 	</div>
 	</header>
@@ -57,7 +58,7 @@ require_once('compteur.php');
 			// On calcule le nombre de pages à créer
 			$nombreDePages  = ceil($totalDesMessages / $nombreDeMessagesParPage);
 			// Puis on fait une boucle pour écrire les liens vers chacune des pages
-			echo '<h3 class="text-center">Page :';
+			echo '<h3 id="entetePage" class="text-center">Page : ';
 			for ($i = 1 ; $i <= $nombreDePages ; $i++)
 			{
 				echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
@@ -86,16 +87,24 @@ require_once('compteur.php');
 
 			while($donnees = $reponse->fetch()){
 
-					echo '<table class="table table-bordered" border="3 solid black">';
-					echo	'<tr> ';
-					echo	"<td class='text-center'>N° Article : $donnees[idArticle]</td></tr>";
-					echo	"<tr><td class='text-center'><h3> $donnees[titre]</h3></td></tr>";
-					echo	"<tr><td> $donnees[texte]</td></tr>";
-					if($donnees['image']!=null){
-						echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
-					}
-					echo	"<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
-					echo	"<tr><td class='text-right'><a href='#'>Commentaires</a></td></tr>";
+					echo '<table class="table table-bordered">';
+						echo '<tbody>';
+							echo '<tr> ';
+							echo "<td class='text-center'>N° Article : $donnees[idArticle]</td></tr>";
+							echo "<tr><td class='text-center'><h3> $donnees[titre]</h3></td></tr>";
+							echo "<tr><td> $donnees[texte]</td></tr>";
+							if($donnees['image']!=null){
+								echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
+							}
+							echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
+							//echo	"<tr><td class='text-right'><a href='#'>Répondre</a>&nbsp<a href='#'>Lire les commentaires</a></td></tr>";
+							echo "<tr><td class='text-right'><button type='button' class='btn btn-default btn-sm'>";
+								echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
+							echo "</button>";
+							echo "<button type='button' class='btn btn-default btn-sm' action='#'>";
+								echo "<span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> Lire les commentaires";
+							echo "</button></td></tr>";
+						echo "</tbody>";
 					echo '</table><br/><br/>';
 			}
 			
@@ -114,6 +123,7 @@ require_once('compteur.php');
 	</body>
 	
 	<footer>
+	<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
 	<?php echo compteurGlobal();?>
 	</footer>
 </html>
