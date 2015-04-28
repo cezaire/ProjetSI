@@ -24,6 +24,7 @@
 
 <?php
 session_start();
+require_once('conf.inc.php');
 echo showForm();
 
 if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){

@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('conf.inc.php');
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ session_start();
 		<?php
 		try{
 
-			$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
+			//$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
 			
 			//Nombre d'article par page
 			$nombreDeMessagesParPage = 2;
@@ -86,22 +87,21 @@ session_start();
 
 
 			//echo '<table id="consultation" border="1">';
-
+			
+			echo "<div class='table table-bordered'>";			
 			//while ($donnees = mysql_fetch_array($reponse)) 
-			while($donnees = $reponse->fetch())
-			{
-			echo "<div class='table table-bordered'>";
-				echo '<table border="1">';
-				echo	'<tr> ';
-				echo	"<td>N° Article : $donnees[idArticle]</td></tr>";
-				echo	"<tr><td> $donnees[titre]</td></tr>";
-				echo	"<tr><td> $donnees[texte]</td></tr>";
-				echo	"<tr><td><img src='$donnees[image]' alt=''/></td></tr>";
-				echo	"<tr><td>Auteur : $donnees[idPersonne]</td></tr>";
+				while($donnees = $reponse->fetch()){
 
-				echo '</table><br/>';
+						echo '<table border="1">';
+						echo	'<tr> ';
+						echo	"<td>N° Article : $donnees[idArticle]</td></tr>";
+						echo	"<tr><td> $donnees[titre]</td></tr>";
+						echo	"<tr><td> $donnees[texte]</td></tr>";
+						echo	"<tr><td><img src='$donnees[image]' alt=''/></td></tr>";
+						echo	"<tr><td>Auteur : $donnees[idPersonne]</td></tr>";
+						echo '</table><br/><br/>';
+				}
 			echo "</div>";
-			}
 			
 
 			$reponse->closeCursor();

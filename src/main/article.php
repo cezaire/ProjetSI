@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once('conf.inc.php');
 ?>
 
 <!DOCTYPE html>
@@ -52,7 +53,6 @@ session_start();
 
 <?php
 	
-	
 	if(isset($_POST["titre"]) && isset($_POST["texte"]) && isset($_POST["envoyer"])){
 		$titre=$_POST["titre"];
 		$texte=$_POST["texte"];
@@ -78,7 +78,7 @@ session_start();
 					}
 					if($trouve==0){
 						$image='';
-						if(isset($_FILES['image'])){						
+						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1 && $_FILES['image']['error'][0] > 0){						
 
 							//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
 							$content_dir = '../img/'; // dossier où sera déplacé le fichier
@@ -105,12 +105,12 @@ session_start();
 							{
 								exit("Impossible de copier l'image dans $content_dir");
 							}
-
+							$image="$content_dir$name_file";
 							echo "L'image a bien été uploadé";
 						}
 						
 						//AJOUT DE L'ARTICLE DANS LA BDD
-						$image="$content_dir$name_file";
+						//$image="$content_dir$name_file";
 						$ajout = $bdd->prepare("INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)");
 						$ajout->bindParam(':titre', $titre);
 						$ajout->bindParam(':image', $image);

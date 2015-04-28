@@ -1,3 +1,8 @@
+<?php
+session_start();
+require_once('conf.inc.php');
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
