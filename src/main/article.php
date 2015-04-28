@@ -85,10 +85,10 @@ require_once('conf.inc.php');
 
 							$tmp_file = $_FILES['image']['tmp_name'];
 
-							/*if( !is_uploaded_file($tmp_file) )
+							if( !is_uploaded_file($tmp_file) )
 							{
 								exit("L'image est introuvable");
-							}*/
+							}
 
 							// on vérifie maintenant l'extension
 							$type_file = $_FILES['image']['type'];
