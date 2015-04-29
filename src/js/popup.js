@@ -31,7 +31,6 @@
  
  
 function refresh(){
-	//alert('toto');
-	opener.location.href=('../main/accueil.php');  
-	self.close();  
+	opener.location.href=('../main/accueil.php'); 
+	setTimeout("self.close();", 1000);  
  }

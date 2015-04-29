@@ -56,15 +56,14 @@ require_once('compteur.php');
 
 			$reponse = $bdd->query("SELECT * FROM commentaire WHERE idArticle=$article ORDER BY idCommentaire DESC LIMIT " . $premierMessageAafficher . ', ' . $nombreDeMessagesParPage);
 
-
-			while($donnees = $reponse->fetch()){
+			while($data = $reponse->fetch()){
 			
 				echo '<table class="table table-bordered">';
 					echo '<tbody>';
 						echo '<tr> ';
-						echo "<td><p><i>Commentaire N°$donnees[idCommentaire] :";
-						echo " $donnees[auteur]<i></p></td></tr>";
-						echo "<tr><td> $donnees[texte]</td></tr>";
+						echo "<td><p><i>Commentaire N°$data[idCommentaire] :";
+						echo " $data[auteur]<i></p></td></tr>";
+						echo "<tr><td> $data[texte]</td></tr>";
 					echo "</tbody>";
 				echo '</table><br/><br/>';
 			}
@@ -79,7 +78,7 @@ require_once('compteur.php');
 					echo '<a id="pageCourante">' . $i . '</a> ';
 				}
 				else{
-					echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
+					echo '<a id="page" href="readComment.php?idArticle='.$article.'&page=' . $i . '">' . $i . '</a> ';
 				}
 			}
 			echo '</h3>';		

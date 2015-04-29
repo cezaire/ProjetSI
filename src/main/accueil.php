@@ -92,7 +92,7 @@ require_once('compteur.php');
 						if($donnees['image']!=null){
 							echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
 						}
-						echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
+						echo "<tr><td><span class='glyphicon glyphicon-user' aria-hidden='true'></span><i> $donnees[idPersonne]</i></td></tr>";
 						echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
 							echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
 						echo "</button></a>";
@@ -130,7 +130,7 @@ require_once('compteur.php');
 	</body>
 	
 	<footer>
-	<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
-	<?php echo compteurGlobal();?>
+		<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
+		<?php echo compteurGlobal();?>
 	</footer>
 </html>
