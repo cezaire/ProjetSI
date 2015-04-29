@@ -59,11 +59,7 @@ require_once('compteur.php');
 			// On calcule le nombre de pages à créer
 			$nombreDePages  = ceil($totalDesMessages / $nombreDeMessagesParPage);
 	
-			 
-			 
-			// --------------- Étape 3 ---------------
-			// Maintenant, on va afficher les messages
-			// ---------------------------------------
+
 			 
 			if (isset($_GET['page']))
 			{
@@ -81,26 +77,30 @@ require_once('compteur.php');
 
 
 			while($donnees = $reponse->fetch()){
-
-					echo '<table class="table table-bordered">';
-						echo '<tbody>';
-							echo '<tr> ';
-							echo "<td class='text-center'><h3>Article N°$donnees[idArticle] :";
-							echo " $donnees[titre]</h3></td></tr>";
-							echo "<tr><td> $donnees[texte]</td></tr>";
-							if($donnees['image']!=null){
-								echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
-							}
-							echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
-							//echo	"<tr><td class='text-right'><a href='#'>Répondre</a>&nbsp<a href='#'>Lire les commentaires</a></td></tr>";
-							echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
-								echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
-							echo "</button></a>";
-							echo "<button type='button' class='btn btn-default btn-sm'>";
-								echo "<span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> Lire les commentaires";
-							echo "</button></td></tr>";
-						echo "</tbody>";
-					echo '</table><br/><br/>';
+				//SELECTION DU NOMBRE DE COMMENTAIRES PAR ARTICLE
+				$requete="SELECT COUNT(*) AS nb_comment FROM commentaire WHERE idArticle=$donnees[idArticle]";
+				$resultat = $bdd->query($requete);
+				$data = $resultat->fetch();
+				
+				echo '<table class="table table-bordered">';
+					echo '<tbody>';
+						echo '<tr> ';
+						echo "<td class='text-center'><h3>Article N°$donnees[idArticle] :";
+						echo " $donnees[titre]</h3></td></tr>";
+						echo "<tr><td> $donnees[texte]</td></tr>";
+						if($donnees['image']!=null){
+							echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
+						}
+						echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
+						//echo	"<tr><td class='text-right'><a href='#'>Répondre</a>&nbsp<a href='#'>Lire les commentaires</a></td></tr>";
+						echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
+							echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
+						echo "</button></a>";
+						echo "<button type='button' class='btn btn-default btn-sm'>";
+							echo "<span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> $data[nb_comment] commentaires";
+						echo "</button></td></tr>";
+					echo "</tbody>";
+				echo '</table><br/><br/>';
 			}
 			
 

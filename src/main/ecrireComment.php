@@ -59,8 +59,9 @@ require_once('conf.inc.php');
 				$ajout->bindParam(':idArticle', $article);
 				$ajout->execute();
 				
-				echo '<script>alert("comment reussie");</script>';
+				//echo '<script>alert("comment reussie");</script>';
 				//header('Location:https://www.google.fr/?gws_rd=ssl');
+				echo "<script>refresh('../main/accueil.php');</script>";
 			
 
 			}

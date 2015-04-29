@@ -13,3 +13,8 @@
 		 }
 		 window.open('../main/ecrireComment.php?idArticle='+article,'Commentaire','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
  }
+ 
+function refresh(url){  
+	 opener.location.href=url;  
+	 self.close();  
+ };  
