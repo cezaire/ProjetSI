@@ -32,6 +32,7 @@ require_once('compteur.php');
 			  <?php  if(!isset($_SESSION['id'])){ echo "<li><a href='connexionUsers.php' title='Connexion'>Connexion</a></li>";} ?>
 			  <?php  if(!isset($_SESSION['id'])){ echo "<li><a href='inscription.php' title='Inscription'>Inscription</a></li>";} ?>
 			  <?php  if(isset($_SESSION['id'])){ echo "<li><a href='article.php' title='Créer un article'>Créer un article</a></li>";} ?>
+			  <?php  if(isset($_SESSION['id'])){ echo "<li><a href='validation.php' title='Valider les commentaires'>Valider les commentaires</a></li>";} ?>
 			  <?php  if(isset($_SESSION['id'])){ echo "<li><a href='deconnexion.php' title='Déconnexion'>Déconnexion</a></li>";} ?>
 
 			  
@@ -92,13 +93,12 @@ require_once('compteur.php');
 							echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
 						}
 						echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
-						//echo	"<tr><td class='text-right'><a href='#'>Répondre</a>&nbsp<a href='#'>Lire les commentaires</a></td></tr>";
 						echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
 							echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
 						echo "</button></a>";
-						echo "<button type='button' class='btn btn-default btn-sm'>";
+						echo "<a href='#' onclick='commentaire($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
 							echo "<span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> $data[nb_comment] commentaires";
-						echo "</button></td></tr>";
+						echo "</button></a></td></tr>";
 					echo "</tbody>";
 				echo '</table><br/><br/>';
 			}
@@ -107,9 +107,14 @@ require_once('compteur.php');
 			$reponse->closeCursor();
 			// Puis on fait une boucle pour écrire les liens vers chacune des pages
 			echo '<h3 id="entetePage" class="text-center">Page : ';
-			for ($i = 1 ; $i <= $nombreDePages ; $i++)
-			{
-				echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
+			for ($i = 1 ; $i <= $nombreDePages ; $i++){
+				//différencier la page actuelle
+				if($page == $i){
+					echo '<a id="pageCourante">' . $i . '</a> ';
+				}
+				else{
+					echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
+				}
 			}
 			echo '</h3>';		
 

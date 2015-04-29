@@ -1,7 +1,7 @@
 <?php
 
 function compteurGlobal(){
-	if(file_exists('./generated/compteur_visites.txt'))
+	if(file_exists('../generated/compteur_visites.txt'))
 	{
 			$compteur_f = fopen('../generated/compteur_visites.txt', 'r+');
 			$compte = fgets($compteur_f);

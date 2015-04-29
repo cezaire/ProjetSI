@@ -32,6 +32,11 @@ a, h1{
 	color: white;
 }
 
+#pageCourante{
+	color: #2E2EFE;
+	text-decoration: underline;
+}	
+
 td button{
 	margin-right: 1em;
 }
