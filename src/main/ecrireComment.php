@@ -53,30 +53,15 @@ require_once('conf.inc.php');
 		if(!empty($nom) && !empty($texte) && !empty($article)){
 		
 			try{
-	
-				$requete="select * from commentaire";
+				$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, idArticle) VALUES (:nom, :texte, :idArticle)");
+				$ajout->bindParam(':nom', $nom);
+				$ajout->bindParam(':texte', $texte);
+				$ajout->bindParam(':idArticle', $article);
+				$ajout->execute();
 				
-				$reponse = $bdd->query($requete);
-				
-				$trouve=0;
-				
-				while ($ligne = $reponse->fetch()){
-						if($trouve==0 && $ligne['nom']==$nom){
-							$trouve=1;
-							echo("Changer d'Identifiant : Utilisateur deja existant");
-					}
-				}
-				if($trouve==0){
-				
-					$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, idArticle) VALUES (:nom, :texte, :idArticle)");
-					$ajout->bindParam(':nom', $nom);
-					$ajout->bindParam(':texte', $texte);
-					$ajout->bindParam(':idArticle', $article);
-					$ajout->execute();
-					
-					echo '<script>alert("comment reussie");</script>';
-					//header('Location:https://www.google.fr/?gws_rd=ssl');
-				}
+				echo '<script>alert("comment reussie");</script>';
+				//header('Location:https://www.google.fr/?gws_rd=ssl');
+			
 
 			}
 			catch (Exception $e){
