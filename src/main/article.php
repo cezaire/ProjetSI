@@ -62,9 +62,6 @@ require_once('conf.inc.php');
 		if(!empty($titre) && !empty($texte) && !empty($envoyer)){
 		
 			try{
-	
-				$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
-				
 					$requete="select * from article";
 					
 					$reponse = $bdd->query($requete);

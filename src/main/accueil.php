@@ -11,7 +11,8 @@ require_once('compteur.php');
 		<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../style/base.css" rel="stylesheet">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="../style/bootstrap/js/bootstrap.min.js"></script>	
+		<script src="../style/bootstrap/js/bootstrap.min.js"></script>
+		<script src="../js/popup.js"></script>	
 		<title>ACCUEIL </title>  
 		<meta charset="utf-8"/>
 	</head>
@@ -57,13 +58,7 @@ require_once('compteur.php');
 			$totalDesMessages = $donnees['nb_messages'];
 			// On calcule le nombre de pages à créer
 			$nombreDePages  = ceil($totalDesMessages / $nombreDeMessagesParPage);
-			// Puis on fait une boucle pour écrire les liens vers chacune des pages
-			echo '<h3 id="entetePage" class="text-center">Page : ';
-			for ($i = 1 ; $i <= $nombreDePages ; $i++)
-			{
-				echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
-			}
-			echo '</h3>';
+	
 			 
 			 
 			// --------------- Étape 3 ---------------
@@ -90,18 +85,18 @@ require_once('compteur.php');
 					echo '<table class="table table-bordered">';
 						echo '<tbody>';
 							echo '<tr> ';
-							echo "<td class='text-center'>N° Article : $donnees[idArticle]</td></tr>";
-							echo "<tr><td class='text-center'><h3> $donnees[titre]</h3></td></tr>";
+							echo "<td class='text-center'><h3>Article N°$donnees[idArticle] :";
+							echo " $donnees[titre]</h3></td></tr>";
 							echo "<tr><td> $donnees[texte]</td></tr>";
 							if($donnees['image']!=null){
 								echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
 							}
 							echo "<tr><td><i>Auteur : $donnees[idPersonne]</i></td></tr>";
 							//echo	"<tr><td class='text-right'><a href='#'>Répondre</a>&nbsp<a href='#'>Lire les commentaires</a></td></tr>";
-							echo "<tr><td class='text-right'><button type='button' class='btn btn-default btn-sm'>";
+							echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";
 								echo "<span class='glyphicon glyphicon-edit' aria-hidden='true'></span> Répondre";
-							echo "</button>";
-							echo "<button type='button' class='btn btn-default btn-sm' action='#'>";
+							echo "</button></a>";
+							echo "<button type='button' class='btn btn-default btn-sm'>";
 								echo "<span class='glyphicon glyphicon-list-alt' aria-hidden='true'></span> Lire les commentaires";
 							echo "</button></td></tr>";
 						echo "</tbody>";
@@ -110,6 +105,13 @@ require_once('compteur.php');
 			
 
 			$reponse->closeCursor();
+			// Puis on fait une boucle pour écrire les liens vers chacune des pages
+			echo '<h3 id="entetePage" class="text-center">Page : ';
+			for ($i = 1 ; $i <= $nombreDePages ; $i++)
+			{
+				echo '<a id="page" href="accueil.php?page=' . $i . '">' . $i . '</a> ';
+			}
+			echo '</h3>';		
 
 		}
 		catch (Exception $e){

@@ -36,22 +36,20 @@ if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){
 	if(!empty($id) && !empty($mdp)){
 		
 		try{
-			
-			$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
 		
-				$requete="select * from personne where id='".$id."' AND mdp='".$mdp."'";
-				$reponse = $bdd->query($requete);
-				
-				$verif=$reponse->fetch();
-				
-				if($verif){
-					$_SESSION['id']=$id;
-					$_SESSION['mdp']=$mdp;
-					header('Location:./accueil.php');
-				}
-				else{
-					echo 'Identifiant ou Mot de Passe incorrects';
-				}
+			$requete="select * from personne where id='".$id."' AND mdp='".$mdp."'";
+			$reponse = $bdd->query($requete);
+			
+			$verif=$reponse->fetch();
+			
+			if($verif){
+				$_SESSION['id']=$id;
+				$_SESSION['mdp']=$mdp;
+				header('Location:./accueil.php');
+			}
+			else{
+				echo 'Identifiant ou Mot de Passe incorrects';
+			}
 		}
 		catch (Exception $e){
 			die('Erreur : ' . $e->getMessage());

@@ -9,7 +9,7 @@ require_once('conf.inc.php');
 		<link href="../style/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 		<link href="../style/base.css" rel="stylesheet">		
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="../bootstrap/js/bootstrap.min.js"></script>
+		<script src="../style/bootstrap/js/bootstrap.min.js"></script>
 		<title> Inscription </title>
 		<meta charset="utf-8"/>	
 	</head>
@@ -65,32 +65,30 @@ require_once('conf.inc.php');
 		
 			try{
 	
-				$bdd = new PDO('mysql:host=localhost;dbname=projetsi;charset=utf8', 'root', 'root');
+				$requete="select * from personne";
 				
-					$requete="select * from personne";
-					
-					$reponse = $bdd->query($requete);
-					
-					$trouve=0;
-					
-					while ($ligne = $reponse->fetch()){
-							if($trouve==0 && $ligne['id']==$id){
-								$trouve=1;
-								echo("Changer d'Identifiant : Utilisateur deja existant");
-						}
+				$reponse = $bdd->query($requete);
+				
+				$trouve=0;
+				
+				while ($ligne = $reponse->fetch()){
+						if($trouve==0 && $ligne['id']==$id){
+							$trouve=1;
+							echo("Changer d'Identifiant : Utilisateur deja existant");
 					}
-					if($trouve==0){
+				}
+				if($trouve==0){
+				
+					$ajout = $bdd->prepare("INSERT INTO personne (id,email,mdp) VALUES (:id, :email, :mdp)");
+					$ajout->bindParam(':id', $id);
+					$ajout->bindParam(':email', $email);
+					$ajout->bindParam(':mdp', $mdp);
+					$ajout->execute();
 					
-						$ajout = $bdd->prepare("INSERT INTO personne (id,email,mdp) VALUES (:id, :email, :mdp)");
-						$ajout->bindParam(':id', $id);
-						$ajout->bindParam(':email', $email);
-						$ajout->bindParam(':mdp', $mdp);
-						$ajout->execute();
-						
-						echo '<script>alert("inscription reussie");</script>';
-						//header('Location:https://www.google.fr/?gws_rd=ssl');
-					}
-	
+					echo '<script>alert("inscription reussie");</script>';
+					//header('Location:https://www.google.fr/?gws_rd=ssl');
+				}
+
 			}
 			catch (Exception $e){
 			
