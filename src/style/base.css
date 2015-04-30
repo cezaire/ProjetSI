@@ -22,6 +22,10 @@ p a{
 	color: #2E2EFE;
 }
 
+p td{
+	color: black;
+}
+
 table{
 	/*background-color: #5EB6DD;*/
 	background-color: white;
@@ -29,7 +33,6 @@ table{
 
 header{
 	background-color: #5882FA;
-	
 	margin-top: auto;
 }
 
@@ -62,6 +65,22 @@ footer{
 
 .table{
 	border: 3px solid #2E2EFE;
+}
+
+form label{
+	color: white;
+}
+
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
 }
 
 

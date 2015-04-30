@@ -63,10 +63,10 @@ function showForm(){
 
 $r='<div class="container">'; 
 $r.='<form class="form-horizontal" method="post" action="">'; 
-$r.='<div class="form-group"><label>Identifiant</label><input class="form-control" type="text" name="id"/></div>'; 
-$r.='<div class="form-group"><label>Mot de Passe</label><input class="form-control" type="password" name="mdp"/></div>'; 
-$r.='<div class="form-group"><input class="btn btn-primary" id="submit" type="submit" name="connexion" value="connexion"/></div>'; 
-$r.='<div class="form-group"><input class="btn btn-primary" id="reset" type="reset" name="reset" value="reset"/></div>';
+$r.='<div class="row row-centered"><div class="form-group col-xs-4 col-centered"><label>Identifiant</label><input class="form-control" type="text" name="id"/></div></div>'; 
+$r.='<div class="row row-centered"><div class="form-group col-xs-4 col-centered"><label>Mot de Passe</label><input class="form-control" type="password" name="mdp"/></div></div>'; 
+$r.='<div class="row row-centered"><div class="form-group col-xs-4 col-centered"><input class="btn btn-primary" id="submit" type="submit" name="connexion" value="connexion"/></div></div>'; 
+$r.='<div class="row row-centered"><div class="form-group col-xs-4 col-centered"><input class="btn btn-primary" id="reset" type="reset" name="reset" value="reset"/></div></div>';
 $r.='</form></div>'; 
 
 return $r;

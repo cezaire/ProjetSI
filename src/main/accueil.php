@@ -130,7 +130,7 @@ require_once('compteur.php');
 	</body>
 	
 	<footer>
-		<span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
+		<br/><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
 		<?php echo compteurGlobal();?>
 	</footer>
 </html>

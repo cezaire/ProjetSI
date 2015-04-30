@@ -26,20 +26,28 @@ require_once('conf.inc.php');
 	
 		<div class="container">
 			<form class="form-horizontal" action="#" method="post">
-					<div class="form-group">
-						<label>Identifiant </label>
-						<input type="text" class="form-control" name="id" value=""/>
+					<div class="row row-centered">
+						<div class="form-group col-xs-4 col-centered">
+							<label>Identifiant </label>
+							<input type="text" class="form-control" name="id" value="" maxlength="8"/>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>Email </label>
-						<input type="text" class="form-control" name="email" value=""/>
+					<div class="row row-centered">
+						<div class="form-group col-xs-4 col-centered">
+							<label>Email </label>
+							<input type="text" class="form-control" name="email" value=""/>
+						</div>
 					</div>
-					<div class="form-group">
-						<label>Mot de Passe </label>
-						<input type="password" class="form-control" name="mdp" value="" maxlength="8"/>
+					<div class="row row-centered">
+						<div class="form-group col-xs-4 col-centered">
+							<label>Mot de Passe </label>
+							<input type="password" class="form-control" name="mdp" value="" maxlength="8"/>
+						</div>
 					</div>
-					<div class="form-group">
-						<input class="btn btn-primary" type="submit" name="inscription" value="inscription"/>
+					<div class="row row-centered">
+						<div class="form-group col-xs-4 col-centered">
+							<input class="btn btn-primary" type="submit" name="inscription" value="inscription"/>
+						</div>
 					</div>
 					
 			</form>		

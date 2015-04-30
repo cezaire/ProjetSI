@@ -25,22 +25,30 @@ require_once('conf.inc.php');
 	<body>
 	
 		<div class="container">
-			<form class="form-horizontal" enctype="multipart/form-data" action="#" method="post">
-					<div class="form-group">
+			<form class="form-horizontal centered" enctype="multipart/form-data" action="#" method="post">
+				<div class="row">
+					<div class="form-group  col-xs-4">
 							<label>Titre de l'article</label>
 							<input type="text" class="form-control" name="titre" value=""/>
 					</div>
-					<div class="form-group">
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-12">
 						<label>Texte</label>
-						<input type="text" class="form-control" name="texte" value=""/>
+						<textarea rows="10" class="form-control" name="texte" value=""></textarea>
 					</div>
-					<div class="form-group">
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-4">
 						<label>Image</label>
 						<input type="file" class="form-control" name="image" value=""/>
-					</div>					
-					<div class="form-group">
+					</div>	
+				</div>
+				<div class="row">
+					<div class="form-group col-xs-4">
 						<input class="btn btn-primary" type="submit" name="envoyer" value="Envoyer"/>
 					</div>
+				</div>
 			</form>		
 		</div>
 	</body>
