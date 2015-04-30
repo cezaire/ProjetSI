@@ -83,8 +83,8 @@ require_once('conf.inc.php');
 						}
 					}
 					if($trouve==0){
-						$image='';
-						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1 && $_FILES['image']['error'][0] > 0){						
+						$image='rrrr';
+						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1){						
 
 							//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
 							$content_dir = '../img/'; // dossier où sera déplacé le fichier
@@ -114,7 +114,7 @@ require_once('conf.inc.php');
 							$image="$content_dir$name_file";
 							echo "L'image a bien été uploadé";
 						}
-						
+						echo "<h1>$image</h1>";
 						//AJOUT DE L'ARTICLE DANS LA BDD
 						//$image="$content_dir$name_file";
 						$ajout = $bdd->prepare('INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)');
