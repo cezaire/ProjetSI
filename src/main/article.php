@@ -114,7 +114,6 @@ require_once('conf.inc.php');
 							$image="$content_dir$name_file";
 							echo "L'image a bien été uploadé";
 						}
-						echo "<h1>$image</h1>";
 						//AJOUT DE L'ARTICLE DANS LA BDD
 						//$image="$content_dir$name_file";
 						$ajout = $bdd->prepare('INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)');
