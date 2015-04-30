@@ -33,7 +33,7 @@ require_once('compteur.php');
 			//Nombre d'article par page
 			$nombreDeMessagesParPage = 10;
 
-			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM commentaire");
+			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM commentaire WHERE idArticle=$article");
 			$donnees = $reponse->fetch();
 
 			$totalDesMessages = $donnees['nb_messages'];
