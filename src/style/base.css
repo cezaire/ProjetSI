@@ -5,9 +5,21 @@
  */
 
 
-body{
-	/*background-image: url('../img/background.gif');*/
+/*body{
 	background-color: #5EB6DD;
+}*/
+
+body{
+	background-image: url('../img/background.png');
+	background-repeat: repeat;
+}
+
+p{
+	color: white;
+}
+
+p a{
+	color: #2E2EFE;
 }
 
 table{
@@ -17,6 +29,7 @@ table{
 
 header{
 	background-color: #5882FA;
+	
 	margin-top: auto;
 }
 

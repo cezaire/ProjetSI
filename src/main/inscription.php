@@ -36,7 +36,7 @@ require_once('conf.inc.php');
 					</div>
 					<div class="form-group">
 						<label>Mot de Passe </label>
-						<input type="password" class="form-control" name="mdp" value=""/>
+						<input type="password" class="form-control" name="mdp" value="" maxlength="8"/>
 					</div>
 					<div class="form-group">
 						<input class="btn btn-primary" type="submit" name="inscription" value="inscription"/>
@@ -86,7 +86,6 @@ require_once('conf.inc.php');
 					$ajout->execute();
 					
 					echo '<script>alert("inscription reussie");</script>';
-					//header('Location:https://www.google.fr/?gws_rd=ssl');
 				}
 
 			}

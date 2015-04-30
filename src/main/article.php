@@ -109,7 +109,7 @@ require_once('conf.inc.php');
 						
 						//AJOUT DE L'ARTICLE DANS LA BDD
 						//$image="$content_dir$name_file";
-						$ajout = $bdd->prepare("INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)");
+						$ajout = $bdd->prepare('INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)');
 						$ajout->bindParam(':titre', $titre);
 						$ajout->bindParam(':image', $image);
 						$ajout->bindParam(':texte', $texte);
@@ -119,7 +119,7 @@ require_once('conf.inc.php');
 
 						
 						echo '<script>alert("Article enregistré");</script>';
-						//header('Location:https://www.google.fr/?gws_rd=ssl');
+						//header('Location:./accueil.php');
 					}
 	
 			}
