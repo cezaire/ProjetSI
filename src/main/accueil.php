@@ -104,7 +104,7 @@ require_once('compteur.php');
 			}
 			
 
-			$reponse->closeCursor();
+			//$reponse->closeCursor();
 			// Puis on fait une boucle pour écrire les liens vers chacune des pages
 			echo '<h3 id="entetePage" class="text-center">Page : ';
 			for ($i = 1 ; $i <= $nombreDePages ; $i++){
@@ -131,6 +131,12 @@ require_once('compteur.php');
 	
 	<footer>
 		<br/><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
-		<?php echo compteurGlobal();?>
+		<?php 
+		echo compteurGlobal();
+		echo personneConnecte();
+		//echo compteurJournalier();
+		?>
+		
+		
 	</footer>
 </html>

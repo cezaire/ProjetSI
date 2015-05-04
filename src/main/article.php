@@ -83,8 +83,8 @@ require_once('conf.inc.php');
 						}
 					}
 					if($trouve==0){
-						$image='rrrr';
-						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1){						
+						$image='';
+						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1 && $_FILES['image']['error'][0] > 0){						
 
 							//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
 							$content_dir = '../img/'; // dossier où sera déplacé le fichier
