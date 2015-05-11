@@ -133,8 +133,9 @@ require_once('compteur.php');
 		<br/><span class='glyphicon glyphicon-eye-open' aria-hidden='true'></span>
 		<?php 
 		echo compteurGlobal();
+		echo compteurJournalier();
 		echo personneConnecte();
-		//echo compteurJournalier();
+
 		?>
 		
 		
