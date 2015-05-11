@@ -32,20 +32,18 @@ function personneConnecte(){
 	$reponse2 = $bdd->query('select count(ip) as nb from personne_connecte where ip="'.$_SERVER['REMOTE_ADDR'].'"');
 	
 	$dnns = $reponse2->fetch();
-	if($dnns['nb']>0)
-	{
+	if($dnns['nb']>0){
 		$bdd->query('update personne_connecte set timestamp="'.time().'" where ip="'.$_SERVER['REMOTE_ADDR'].'"');
 	}
-	else
-	{
+	else{
 		$bdd->query('insert into personne_connecte (ip, timestamp) values ("'.$_SERVER['REMOTE_ADDR'].'", "'.time().'")');
 	}
 	$times_m_5mins = time()-(60*5);
-	$bdd->query('detete from personne_connecte where timestamp<"'.$times_m_5mins.'"');
+	$bdd->query('delete from personne_connecte where timestamp < ' .$times_m_5mins);
 	
 	$reponse3 = $bdd->query('select count(ip) as nb from personne_connecte');
 	$dnns2 = $reponse3->fetch();
-	echo '<p>Il y a actuellement <strong>'.$dnns2['nb'].'</strong> connecté</p>';
+	echo '<p>Il y a actuellement <strong>'.$dnns2['nb'].'</strong> connectés</p>';
 }
 
 function compteurJournalier(){

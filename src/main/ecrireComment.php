@@ -1,6 +1,8 @@
 ﻿<?php
 session_start();
 require_once('conf.inc.php');
+require_once('./captcha/simple-php-captcha.php');
+$_SESSION['captcha'] = simple_php_captcha();
 ?>
 
 <!DOCTYPE html>
@@ -27,17 +29,35 @@ require_once('conf.inc.php');
 	
 		<div class="container">
 			<form class="form" action="" method="post">	
-				<div class="form-group  col-xs-4">
-					<label>Votre nom </label>
-					<input type="text" class="form-control" name="nom" value="" required="required"/>
+				<div class="row">
+					<div class="form-group  col-xs-4">
+						<label>Votre nom </label>
+						<input type="text" class="form-control" name="nom" value="" required="required"/>
+					</div>
 				</div>
-				<div class="form-group  col-xs-12">
-					<label>Votre texte </label>
-					<textarea rows="5" class="form-control" name="texte" value="" required="required"></textarea>
+				<div class="row">
+					<div class="form-group  col-xs-12">
+						<label>Votre texte </label>
+						<textarea rows="5" class="form-control" name="texte" value="" required="required"></textarea>
+					</div>
 				</div>
-				<div class="form-group  col-xs-12">
-					<input class="btn btn-primary" type="submit" name="comment" value="Valider" onclick='refresh();'/>
-				</div>					
+				<div class="row">
+					<div class="form-group  col-xs-4">
+						<?php
+						echo '<img src="' . $_SESSION['captcha']['image_src'] . '" alt="CAPTCHA code">';
+						?>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group  col-xs-4">
+						<input type="text" class="form-control" name="captcha" value="" required="required"/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group  col-xs-12">
+						<input class="btn btn-primary" type="submit" name="comment" value="Valider" onclick='refresh();'/>
+					</div>
+				</div>
 			</form>
 		</div>
 	</body>
@@ -45,7 +65,6 @@ require_once('conf.inc.php');
 </html>
 
 <?php
-	
 	
 	if(isset($_POST["nom"]) && isset($_POST["texte"]) && isset($_POST["comment"])){
 		$nom=$_POST["nom"];
