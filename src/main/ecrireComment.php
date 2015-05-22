@@ -55,7 +55,7 @@ $_SESSION['captcha'] = simple_php_captcha();
 				</div>
 				<div class="row">
 					<div class="form-group  col-xs-12">
-						<input class="btn btn-primary" type="submit" name="comment" value="Valider" onclick='refresh();'/>
+						<input class="btn btn-primary" type="submit" name="comment" value="Valider"/>
 					</div>
 				</div>
 			</form>
@@ -70,12 +70,14 @@ $_SESSION['captcha'] = simple_php_captcha();
 		$nom=$_POST["nom"];
 		$texte=$_POST["texte"];
 		$article=$_GET["idArticle"];
+		$valide='non';
 		if(!empty($nom) && !empty($texte) && !empty($article)){
 		
 			try{
-				$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, idArticle) VALUES (:nom, :texte, :idArticle)");
+				$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, valide, idArticle) VALUES (:nom, :texte, :valide, :idArticle)");
 				$ajout->bindParam(':nom', $nom);
 				$ajout->bindParam(':texte', $texte);
+				$ajout->bindParam(':valide', $valide);
 				$ajout->bindParam(':idArticle', $article);
 				$ajout->execute();
 				

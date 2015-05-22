@@ -39,7 +39,7 @@ require_once('conf.inc.php');
 					</div>
 				</div>
 				<div class="row">
-					<div class="form-group col-xs-4">
+					<div class="form-group col-xs-6">
 						<label>Image</label>
 						<input type="file" class="form-control" name="image" value=""/>
 					</div>	
@@ -84,7 +84,10 @@ require_once('conf.inc.php');
 					}
 					if($trouve==0){
 						$image='';
-						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1 && $_FILES['image']['error'][0] > 0){						
+						
+						//SI PROBLEME D'IMPORT RETIRER remettre -> TOFIX
+						//if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1 && $_FILES['image']['error'][0] > 0){						
+						if(isset($_FILES['image']) && count($_FILES['image']['error']) == 1){						
 
 							//UPLOAD DE L'IMAGE DANS LE DOSSIER IMG
 							$content_dir = '../img/'; // dossier où sera déplacé le fichier

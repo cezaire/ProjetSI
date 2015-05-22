@@ -31,6 +31,5 @@
  
  
 function refresh(){
-	opener.location.href=('../main/accueil.php'); 
 	setTimeout("self.close();", 1000);  
  }

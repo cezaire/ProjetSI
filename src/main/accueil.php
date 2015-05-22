@@ -51,7 +51,7 @@ require_once('compteur.php');
 		try{
 			
 			//Nombre d'article par page
-			$nombreDeMessagesParPage = 2;
+			$nombreDeMessagesParPage = 3;
 
 			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM article");
 			$donnees = $reponse->fetch();
@@ -79,7 +79,7 @@ require_once('compteur.php');
 
 			while($donnees = $reponse->fetch()){
 				//SELECTION DU NOMBRE DE COMMENTAIRES PAR ARTICLE
-				$requete="SELECT COUNT(*) AS nb_comment FROM commentaire WHERE idArticle=$donnees[idArticle]";
+				$requete="SELECT COUNT(*) AS nb_comment FROM commentaire WHERE idArticle=$donnees[idArticle] and valide='oui'";
 				$resultat = $bdd->query($requete);
 				$data = $resultat->fetch();
 				

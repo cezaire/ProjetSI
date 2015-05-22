@@ -33,7 +33,7 @@ require_once('compteur.php');
 			//Nombre d'article par page
 			$nombreDeMessagesParPage = 10;
 
-			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM commentaire WHERE idArticle=$article");
+			$reponse = $bdd->query("SELECT COUNT(*) AS nb_messages FROM commentaire WHERE idArticle=$article and valide='oui'");
 			$donnees = $reponse->fetch();
 
 			$totalDesMessages = $donnees['nb_messages'];
@@ -54,7 +54,7 @@ require_once('compteur.php');
 			// On calcule le numéro du premier message qu'on prend pour le LIMIT de MySQL
 			$premierMessageAafficher = ($page - 1) * $nombreDeMessagesParPage;
 
-			$reponse = $bdd->query("SELECT * FROM commentaire WHERE idArticle=$article ORDER BY idCommentaire DESC LIMIT " . $premierMessageAafficher . ', ' . $nombreDeMessagesParPage);
+			$reponse = $bdd->query("SELECT * FROM commentaire WHERE idArticle=$article and valide='oui' ORDER BY idCommentaire DESC LIMIT " . $premierMessageAafficher . ', ' . $nombreDeMessagesParPage);
 
 			while($data = $reponse->fetch()){
 			
