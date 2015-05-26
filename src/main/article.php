@@ -102,7 +102,7 @@ if(!isset($_SESSION['captcha'])){
 						while ($ligne = $reponse->fetch()){
 								if($trouve==0 && $ligne['titre']==$titre){
 									$trouve=1;
-									echo("Changer de titre : Article deja existant");
+									echo '<script>alert("Changer de titre : Article deja existant");</script>';
 							}
 						}
 						if($trouve==0){
@@ -144,7 +144,6 @@ if(!isset($_SESSION['captcha'])){
 									$image='';
 							}
 							//AJOUT DE L'ARTICLE DANS LA BDD
-							//$image="$content_dir$name_file";
 							$ajout = $bdd->prepare('INSERT INTO article (titre, texte, image, idPersonne) VALUES (:titre, :texte, :image, :idPersonne)');
 							$ajout->bindParam(':titre', $titre);
 							$ajout->bindParam(':image', $image);

@@ -48,7 +48,7 @@ if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){
 				header('Location:./accueil.php');
 			}
 			else{
-				echo 'Identifiant ou Mot de Passe incorrects';
+				echo '<script>alert("Identifiant ou Mot de Passe incorrects");</script>';
 			}
 		}
 		catch (Exception $e){
@@ -56,8 +56,6 @@ if(isset($_POST['id']) && isset($_POST['mdp']) && isset($_POST['connexion'])){
 		}
 	}
 }
-
-//echo '<a href="Recapitulatif.php"> Retour au recapitulatif  </a>';
 
 function showForm(){
 

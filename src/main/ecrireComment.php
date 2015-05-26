@@ -91,18 +91,21 @@ if(!isset($_SESSION['captcha'])){
 					$ajout->bindParam(':idArticle', $article);
 					$ajout->execute();
 					
-					//echo '<script>alert("Commentaire reussie");</script>';
+					echo '<script>alert("Commentaire reussie");
+					setTimeout("self.close();", 10);
+					</script>';
 
 				}
 				catch (Exception $e){
 				
 					die('Erreur : ' . $e->getMessage());
 				}
-				echo '<script>refresh();</script>';
+				//echo '<script>refresh();</script>';
 			}
 		}
 		else{
-			echo("<h1>Un des parametres est vide</h1>");
+			echo '<script>alert("Un des parametres est vide</h1>");
+			</script>';
 		}
 	}
 	
