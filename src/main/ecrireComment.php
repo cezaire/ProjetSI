@@ -2,7 +2,10 @@
 session_start();
 require_once('conf.inc.php');
 require_once('./captcha/simple-php-captcha.php');
-$_SESSION['captcha'] = simple_php_captcha();
+
+if(!isset($_SESSION['captcha'])){
+	$_SESSION['captcha'] = simple_php_captcha();
+}
 ?>
 
 <!DOCTYPE html>
@@ -65,37 +68,43 @@ $_SESSION['captcha'] = simple_php_captcha();
 </html>
 
 <?php
-	
-	if(isset($_POST["nom"]) && isset($_POST["texte"]) && isset($_POST["comment"])){
+	$captcha = $_SESSION['captcha']['code'];
+	if(isset($_POST["nom"]) && isset($_POST["texte"]) && isset($_POST["comment"]) && isset($_POST["captcha"])){
 		$nom=$_POST["nom"];
 		$texte=$_POST["texte"];
 		$article=$_GET["idArticle"];
 		$valide='non';
-		if(!empty($nom) && !empty($texte) && !empty($article)){
+		$essaiUser=$_POST["captcha"];
 		
-			try{
-				$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, valide, idArticle) VALUES (:nom, :texte, :valide, :idArticle)");
-				$ajout->bindParam(':nom', $nom);
-				$ajout->bindParam(':texte', $texte);
-				$ajout->bindParam(':valide', $valide);
-				$ajout->bindParam(':idArticle', $article);
-				$ajout->execute();
-				
-				//echo '<script>alert("comment reussie");</script>';
-				//header('Location:https://www.google.fr/?gws_rd=ssl');
-				
+		if(!empty($nom) && !empty($texte) && !empty($article)){
 			
+			//Vérification du captcha
+			if($captcha != $essaiUser){
+				echo '<script>alert("Captcha Incorrect !");</script>';	
+			}
+			else{
+				try{
+					$ajout = $bdd->prepare("INSERT INTO commentaire (auteur, texte, valide, idArticle) VALUES (:nom, :texte, :valide, :idArticle)");
+					$ajout->bindParam(':nom', $nom);
+					$ajout->bindParam(':texte', $texte);
+					$ajout->bindParam(':valide', $valide);
+					$ajout->bindParam(':idArticle', $article);
+					$ajout->execute();
+					
+					//echo '<script>alert("Commentaire reussie");</script>';
 
+				}
+				catch (Exception $e){
+				
+					die('Erreur : ' . $e->getMessage());
+				}
+				echo '<script>refresh();</script>';
 			}
-			catch (Exception $e){
-			
-				die('Erreur : ' . $e->getMessage());
-			}
-			echo '<script>refresh();</script>';
 		}
 		else{
-			echo("Un des parametres est vide");
+			echo("<h1>Un des parametres est vide</h1>");
 		}
 	}
 	
+	$_SESSION['captcha'] = simple_php_captcha();
 ?>

@@ -1,6 +1,6 @@
 ﻿function popUp(article){
 		 width = 600;
-		 height = 450;
+		 height = 600;
 		 if(window.innerWidth)
 		 {
 				 var left = (window.innerWidth-width)/2;
@@ -16,7 +16,7 @@
  
  function commentaire(article){
 		 width = 600;
-		 height = 450;
+		 height = 600;
 		 if(window.innerWidth){
 				 var left = (window.innerWidth-width)/2;
 				 var top = (window.innerHeight-height)/2;

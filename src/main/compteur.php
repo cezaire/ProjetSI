@@ -43,7 +43,13 @@ function personneConnecte(){
 	
 	$reponse3 = $bdd->query('select count(ip) as nb from personne_connecte');
 	$dnns2 = $reponse3->fetch();
-	echo '<p>Il y a actuellement <strong>'.$dnns2['nb'].'</strong> connectés</p>';
+	
+	if($dnns2['nb'] ==  0 || $dnns2['nb'] == 1){
+		echo '<p>Il y a actuellement <strong>'.$dnns2['nb'].'</strong> connecté</p>';
+	}
+	else{
+		echo '<p>Il y a actuellement <strong>'.$dnns2['nb'].'</strong> connectés</p>';
+	}
 }
 
 function compteurJournalier(){

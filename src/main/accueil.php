@@ -90,7 +90,7 @@ require_once('compteur.php');
 						echo " $donnees[titre]</h3></td></tr>";
 						echo "<tr><td> $donnees[texte]</td></tr>";
 						if($donnees['image']!=null){
-							echo	"<tr><td class='text-center'><img src='$donnees[image]' alt=''/></td></tr>";
+							echo	"<tr><td class='text-center'><img class='img-responsive center-block' src='$donnees[image]' alt=''/></td></tr>";
 						}
 						echo "<tr><td><span class='glyphicon glyphicon-user' aria-hidden='true'></span><i> $donnees[idPersonne]</i></td></tr>";
 						echo "<tr><td class='text-right'><a href='#' onclick='popUp($donnees[idArticle]);'><button type='button' class='btn btn-default btn-sm'>";

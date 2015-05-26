@@ -27,7 +27,8 @@ require_once('conf.inc.php');
 	
 	
 	<?php
-
+	$i=1;
+	
 	//requete pour choisir les mots à valider
 	if(isset($_POST["valide"])){
 		$valide=$_POST["valide"];
@@ -35,8 +36,8 @@ require_once('conf.inc.php');
 		$bdd->query("UPDATE commentaire SET valide = 'oui' WHERE idCommentaire = '".$valide."'");
 	}
 
-	if(isset($_GET["suppression"])){
-		$suppression=$_GET["suppression"];
+	if(isset($_POST["suppression"])){
+		$suppression=$_POST["suppression"];
 		
 		$bdd->query("delete FROM commentaire WHERE idCommentaire = '".$suppression."'");
 	}
@@ -69,11 +70,11 @@ require_once('conf.inc.php');
 	echo "<table class='table table-bordered'>
 	<tr>
 	<th>Id</th>
-	<th>Auteur</th>
+	<th><span class='glyphicon glyphicon-user' aria-hidden='true'></span> Auteur</th>
 	<th>Texte</th>
 	<th>Id de l'article</th>
-	<th>Validation</th>
-	<th>Suppression</th>
+	<th><span class='glyphicon glyphicon-ok' aria-hidden='true'></span> Validation</th>
+	<th><span class='glyphicon glyphicon-trash' aria-hidden='true'></span> Suppression</th>
 	</tr>
 	<tbody>";
 	
@@ -82,12 +83,12 @@ require_once('conf.inc.php');
 	  echo "<td>" . $row['idCommentaire'] . "</td>";
 	  echo "<td>" . $row['auteur'] . "</td>";
 	  echo "<td>" . $row['texte'] . "</td>";
-	  echo "<td>[" . $row['idArticle'] . "]</td>";
+	  echo "<td>" . $row['idArticle'] . "</td>";
 		//  
 	  $valide=$row['idCommentaire'];
-	  echo "<td><form action=validation.php method='post'><button name=valide type='submit' value='".$valide."' >Validation</button></form></td>";
+	  echo "<td><form method='post'><button name=valide type='submit' class='btn btn-success' value='".$valide."' >Validation</button></form></td>";
 	  $suppression=$row['idCommentaire'];  
-	  echo "<td><form action=validation.php method='get'><button name=suppression type='submit' value='".$suppression."' >Suppression</button></form></td>";
+	  echo "<td><form method='post'><button name=suppression type='submit' class='btn btn-danger' value='".$suppression."' >Suppression</button></form></td>";
 	  echo "</tr>";
 	  }
 	echo "</tbody>";

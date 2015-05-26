@@ -1,6 +1,11 @@
 <?php
 session_start();
 require_once('conf.inc.php');
+require_once('./captcha/simple-php-captcha.php');
+
+if(!isset($_SESSION['captcha'])){
+	$_SESSION['captcha'] = simple_php_captcha();
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +50,18 @@ require_once('conf.inc.php');
 						</div>
 					</div>
 					<div class="row row-centered">
+						<div class="form-group  col-xs-4 col-centered">
+							<?php
+							echo '<img src="' . $_SESSION['captcha']['image_src'] . '" alt="CAPTCHA code">';
+							?>
+						</div>
+					</div>
+					<div class="row row-centered">
+						<div class="form-group  col-xs-4 col-centered">
+							<input type="text" class="form-control" name="captcha" value="" required="required"/>
+						</div>
+					</div>
+					<div class="row row-centered">
 						<div class="form-group col-xs-4 col-centered">
 							<input class="btn btn-primary" type="submit" name="inscription" value="inscription"/>
 						</div>
@@ -62,48 +79,58 @@ require_once('conf.inc.php');
 </html>
 
 <?php
-	
+	$captcha = $_SESSION['captcha']['code'];
 	
 	if(isset($_POST["id"]) && isset($_POST["mdp"]) && isset($_POST["email"]) && isset($_POST["inscription"])){
 		$id=$_POST["id"];
 		$mdp=$_POST["mdp"];
 		$email=$_POST["email"];
 		$inscription=$_POST["inscription"];
-		if(!empty($id) && !empty($mdp) && !empty($inscription) && !empty($email)){
+		$essaiUser=$_POST["captcha"];
 		
-			try{
-	
-				$requete="select * from personne";
-				
-				$reponse = $bdd->query($requete);
-				
-				$trouve=0;
-				
-				while ($ligne = $reponse->fetch()){
-						if($trouve==0 && $ligne['id']==$id){
-							$trouve=1;
-							echo("Changer d'Identifiant : Utilisateur deja existant");
-					}
-				}
-				if($trouve==0){
-				
-					$ajout = $bdd->prepare("INSERT INTO personne (id,email,mdp) VALUES (:id, :email, :mdp)");
-					$ajout->bindParam(':id', $id);
-					$ajout->bindParam(':email', $email);
-					$ajout->bindParam(':mdp', $mdp);
-					$ajout->execute();
-					
-					echo '<script>alert("inscription reussie");</script>';
-				}
-
+		if(!empty($id) && !empty($mdp) && !empty($inscription) && !empty($email)){
+			//Vérification du captcha
+			if($captcha != $essaiUser){
+				echo '<script>alert("Captcha Incorrect !");</script>';	
 			}
-			catch (Exception $e){
-			
-				die('Erreur : ' . $e->getMessage());
+			else{
+				try{
+		
+					$requete="select * from personne";
+					
+					$reponse = $bdd->query($requete);
+					
+					$trouve=0;
+					
+					while ($ligne = $reponse->fetch()){
+							if($trouve==0 && $ligne['id']==$id){
+								$trouve=1;
+								echo("Changer d'Identifiant : Utilisateur deja existant");
+						}
+					}
+					if($trouve==0){
+					
+						$ajout = $bdd->prepare("INSERT INTO personne (id,email,mdp) VALUES (:id, :email, :mdp)");
+						$ajout->bindParam(':id', $id);
+						$ajout->bindParam(':email', $email);
+						$ajout->bindParam(':mdp', $mdp);
+						$ajout->execute();
+						
+						echo '<script>alert("inscription reussie");
+						document.location.href = "./accueil.php"</script>';
+					}
+
+				}
+				catch (Exception $e){
+				
+					die('Erreur : ' . $e->getMessage());
+				}
 			}
 		}
 		else{
 			echo("Un des parametres est vide");
 		}
 	}
+	
+	$_SESSION['captcha'] = simple_php_captcha();
 ?>
